@@ -10,7 +10,7 @@ resource "aws_instance" "front-proxy" {
         aws_security_group.front-proxy.id
     ]
 
-    key_name = aws_key_pair.cluster_key.key_name
+    key_name = var.key
 
     tags = merge(var.tags, { 
         Name = format("%s-front-proxy", var.project_name)
@@ -57,4 +57,8 @@ resource "aws_security_group" "front-proxy" {
     })
 
 
+}
+
+output "ip" {
+  value = "${aws_instance.front-proxy.*.public_ip}"
 }

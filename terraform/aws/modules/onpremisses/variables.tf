@@ -4,7 +4,7 @@ variable "ami" {}
 
 variable "aws_region" {}
 
-variable "aws_key_path" {}
+variable "key" {}
 
 variable "tags" {}
 

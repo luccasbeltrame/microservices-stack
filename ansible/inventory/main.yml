@@ -1,6 +1,7 @@
 all:
   vars:
     ansible_ssh_user: ubuntu
+    domain: helloworld.com
   children:
     front-proxy:
       hosts:
@@ -10,3 +11,7 @@ all:
       hosts:
         0.0.0.0:
         1.2.3.4:
+
+    web:
+      hosts:
+        0.0.0.0:

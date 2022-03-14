@@ -47,8 +47,9 @@ module "front-proxy" {
   ami = var.ami
   cluster_vpc   = module.network.cluster_vpc
   subnet_id  = module.network.public_subnet_1a
-  aws_key_path = var.aws_key_path
+  key = var.key
   public_subnet_1a = module.network.public_subnet_1a
+
 }
 
 module "onpremisses" {
@@ -61,6 +62,14 @@ module "onpremisses" {
   ami = var.ami
   cluster_vpc   = module.network.cluster_vpc
   subnet_id  = module.network.public_subnet_1a
-  aws_key_path = var.aws_key_path
+  key = var.key
   public_subnet_1a = module.network.public_subnet_1a
+
+}
+
+module "key-pair" {
+  source = "./modules/key-pair"
+
+  project_name  = var.project_name
+  aws_key_path = var.aws_key_path
 }

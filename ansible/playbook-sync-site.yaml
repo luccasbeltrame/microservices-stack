@@ -1,0 +1,11 @@
+- hosts: web
+  tasks:
+  - name: "sync website"
+    synchronize:
+      src: site/
+      dest: /var/www/{{ domain }}
+      archive: no
+      checksum: yes
+      recursive: yes
+      delete: yes
+    become: no

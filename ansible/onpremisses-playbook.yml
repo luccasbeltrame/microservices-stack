@@ -1,4 +1,4 @@
-- hosts: front-proxy
+- hosts: web
   gather_facts: False
   remote_user: ubuntu
   become: yes
@@ -6,4 +6,4 @@
   become_user: root
   roles: 
     - { role: commons }
-    - { role: front-proxy }
+    - { role: onpremisses }

@@ -10,7 +10,7 @@ resource "aws_instance" "onpremisses" {
         aws_security_group.onpremisses.id
     ]
 
-    key_name = aws_key_pair.cluster_key.key_name
+    key_name = var.key
 
     tags = merge(var.tags, { 
         Name = format("%s-onpremisses", var.project_name)
@@ -57,4 +57,8 @@ resource "aws_security_group" "onpremisses" {
     })
 
 
+}
+
+output "ip" {
+  value = "${aws_instance.onpremisses.*.public_ip}"
 }

@@ -75,3 +75,8 @@ variable "front-proxy_instance_type" {
     default = "t3.large"
 }
 
+variable "key" {
+    description = "Front Proxy Instance type"
+    default = "lab_key"
+}
+
