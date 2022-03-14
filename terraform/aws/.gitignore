@@ -3,3 +3,4 @@ terraform.tf*
 .terraform*
 lab_key*
 serviceaccount.json
+terraform.lock*
