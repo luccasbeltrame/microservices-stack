@@ -1,0 +1,12 @@
+all:
+  vars:
+    ansible_ssh_user: ubuntu
+  children:
+    front-proxy:
+      hosts:
+        54.234.108.197:
+
+    nodes:
+      hosts:
+        0.0.0.0:
+        1.2.3.4:

@@ -40,3 +40,17 @@ variable "auto_scale_cpu" {
   }
 }
 
+variable "aws_key_path" {
+    description = "key_path"
+    default     = "./lab_key.pub"
+}
+
+variable "front_proxy_instance_type" {
+    description = "Front Proxy Instance type"
+    default = "t3.large"
+}
+
+variable "ami" {
+    description = "Ubuntu 18.04 AMI"
+    default = "ami-0e472ba40eb589f49"
+}
