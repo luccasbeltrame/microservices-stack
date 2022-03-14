@@ -40,17 +40,38 @@ variable "auto_scale_cpu" {
   }
 }
 
-variable "aws_key_path" {
-    description = "key_path"
-    default     = "./lab_key.pub"
-}
-
-variable "front_proxy_instance_type" {
-    description = "Front Proxy Instance type"
-    default = "t3.large"
+variable "project_name" {
+    description = "Cluster Name"
+    default     = "microservices-stack"
 }
 
 variable "ami" {
     description = "Ubuntu 18.04 AMI"
     default = "ami-0e472ba40eb589f49"
 }
+
+
+# Customize your key path
+variable "aws_key_path" {
+    description = "key_path"
+    default     = "./lab_key.pub"
+}
+
+# Tags
+variable "tags" {
+    default = {
+        project       = "microservices-stack"
+        enviroment    = "prod"
+    }
+}
+
+variable "onpremisses_instance_type" {
+    description = "Front Proxy Instance type"
+    default = "t3.large"
+}
+
+variable "front-proxy_instance_type" {
+    description = "Front Proxy Instance type"
+    default = "t3.large"
+}
+

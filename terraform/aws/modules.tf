@@ -36,3 +36,31 @@ module "nodes" {
 
   auto_scale_cpu     = var.auto_scale_cpu
 }
+
+module "front-proxy" {
+  source = "./modules/front-proxy"
+
+  project_name  = var.project_name
+  aws_region    =  var.aws_region
+  front-proxy_instance_type = var.front-proxy_instance_type
+  tags = var.tags
+  ami = var.ami
+  cluster_vpc   = module.network.cluster_vpc
+  subnet_id  = module.network.public_subnet_1a
+  aws_key_path = var.aws_key_path
+  public_subnet_1a = module.network.public_subnet_1a
+}
+
+module "onpremisses" {
+  source = "./modules/onpremisses"
+
+  project_name  = var.project_name
+  aws_region    =  var.aws_region
+  onpremisses_instance_type = var.onpremisses_instance_type
+  tags = var.tags
+  ami = var.ami
+  cluster_vpc   = module.network.cluster_vpc
+  subnet_id  = module.network.public_subnet_1a
+  aws_key_path = var.aws_key_path
+  public_subnet_1a = module.network.public_subnet_1a
+}

@@ -1,28 +1,28 @@
-resource "aws_instance" "front_proxy" {
+resource "aws_instance" "front-proxy" {
 
     ami = var.ami
-    instance_type = var.front_proxy_instance_type
+    instance_type = var.front-proxy_instance_type
 
-    subnet_id = aws_subnet.public_subnet.id
+    subnet_id = var.public_subnet_1a.id
     associate_public_ip_address = true
 
     vpc_security_group_ids = [ 
-        aws_security_group.front_proxy.id
+        aws_security_group.front-proxy.id
     ]
 
     key_name = aws_key_pair.cluster_key.key_name
 
     tags = merge(var.tags, { 
-        Name = format("%s-front_proxy", var.project_name)
+        Name = format("%s-front-proxy", var.project_name)
     })
 
 }
 
-resource "aws_security_group" "front_proxy" {
+resource "aws_security_group" "front-proxy" {
 
-    name        = format("%s-front_proxy-sg", var.project_name)
+    name        = format("%s-front-proxy-sg", var.project_name)
 
-    vpc_id      = aws_vpc.cluster_vpc.id
+    vpc_id = var.cluster_vpc.id
 
     ingress {
         from_port   = "22"
@@ -45,13 +45,6 @@ resource "aws_security_group" "front_proxy" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    ingress {
-        from_port   = "5000"
-        to_port     = "5000"
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
     egress {
         from_port   = 0
         to_port     = 0
@@ -60,7 +53,7 @@ resource "aws_security_group" "front_proxy" {
     }
 
     tags = merge(var.tags, { 
-        Name = format("%s-front_proxy-sg", var.project_name)
+        Name = format("%s-front-proxy-sg", var.project_name)
     })
 
 
