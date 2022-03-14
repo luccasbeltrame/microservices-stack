@@ -1,0 +1,9 @@
+FROM python:3.9.9
+
+RUN apt-get update && apt-get -q install --no-install-recommends -y python3-pip curl
+RUN pip3 install -q Flask==2.0.3 requests==2.18.4
+RUN mkdir /code
+ADD ./service.py /code
+ADD ./start_service.sh /usr/local/bin/start_service.sh
+RUN chmod u+x /usr/local/bin/start_service.sh
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/start_service.sh"]

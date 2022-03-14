@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8000
+    targetPort: http
+    protocol: TCP
+  selector:
+    app: service2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service2
+  labels:
+    app: service2
+spec:
+  selector:
+    matchLabels:
+      app: service2
+  template:
+    metadata:
+      labels:
+        app: service2
+    spec:
+      containers:                  
+        - name: service2
+          image: luccasbeltrame/service2
+          imagePullPolicy: Always
+          ports:
+          - name: http
+            containerPort: 8000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: service2
+  annotations:
+  #  cert-manager.io/cluster-issuer: letsencrypt
+    ingress.kubernetes.io/force-ssl-redirect: "false"
+    kubernetes.io/ingress.class: contour
+  #  kubernetes.io/tls-acme: "true"
+spec:
+#  tls:
+#  - secretName: service2
+#    hosts:
+#    - service2.xpto
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: service2
+          servicePort: 8000            
