@@ -7,5 +7,5 @@
       archive: no
       checksum: yes
       recursive: yes
-      delete: yes
+      delete: yes 
     become: no
